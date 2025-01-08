@@ -1,59 +1,59 @@
-
-
-
-
 import 'package:flutter/material.dart';
+import './questao.dart';  
 
 main(){
-
-    runApp(PergutaApp());
+  
+    runApp(PerguntaApp());
+    
 
 }
 
+class _PerguntaAppState extends State<PerguntaApp>{
 
-class PergutaApp extends StatelessWidget {
+var _perguntaselcionada = 0;
 
-var perguntaselcionada = 1;
-
-void responder(){
-  perguntaselcionada++;
-  print(perguntaselcionada);
+void _responder(){
+  setState(() {
+    if(_perguntaselcionada == 1){
+    _perguntaselcionada--;  
+    }
+    else{
+      _perguntaselcionada++;  
+    }
+    
+  });
+  print(_perguntaselcionada);
 }
 
-void Function() funcaoqueretorneoutrafuncao(){
-  return(){
-    print('Pergunta repondidda #02');
-  }; 
-}
+
   @override  
   Widget build(BuildContext context){
     final List<String> perguntas = [
       'Qual e teu celular',
       'qual a e sua,'
     ];
-    
-    
+        
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('perguntas'),
-          backgroundColor: Colors.black,
+          backgroundColor: const Color.fromARGB(255, 3, 137, 255),
           
         ),
         body: Column(
           children: <Widget>[
-            Text(perguntas[perguntaselcionada]),
+            Questao(perguntas[_perguntaselcionada]),
             ElevatedButton(
             child: Text('Resposta 1'),
-            onPressed: responder,
+            onPressed: _responder
             ),
             ElevatedButton(
             child: Text('Resposta 2'),
-            onPressed: (){('reposta 2 selecionada');}
+            onPressed: _responder
             ),
             ElevatedButton(
             child: Text('Resposta 3'),
-            onPressed: funcaoqueretorneoutrafuncao
+            onPressed: _responder
             ),
           ],
         ),  
@@ -62,6 +62,14 @@ void Function() funcaoqueretorneoutrafuncao(){
       );
   }
   
+}
+class PerguntaApp extends StatefulWidget {
+
+  _PerguntaAppState createState(){
+    return _PerguntaAppState();
+  }
+
+
 }
 
 
